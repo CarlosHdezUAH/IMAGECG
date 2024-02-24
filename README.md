@@ -74,6 +74,6 @@ Este archivo es un script de shell que automatiza varias tareas del proyecto. Se
 
 ### Archivo `config.yml`
 
-Este archivo de configuración permite cambiar algunos parámetros del entrenamiento como el learning rate, el batch size, el número de parches extraidos por cada registro ECG, la red empleada para el entrenamiento, el número de steps de entrenamiento y los pesos asociados a cada clase.
+Este archivo de configuración permite cambiar algunos parámetros del entrenamiento como el learning rate, el batch size, el número de parches extraidos por cada registro ECG, la red empleada, el número de steps y los pesos asociados a cada clase.
 
 
