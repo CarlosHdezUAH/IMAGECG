@@ -2,7 +2,7 @@ import os
 import cv2
 
 # Directorio base donde se encuentran las carpetas LOO_XXXXXX
-base_dir = "/home/carloshf/imagecg/generacion_imagenes/LOO/"
+base_dir = "./LOO/"
 
 # Tamaño del recorte
 crop_size = 256

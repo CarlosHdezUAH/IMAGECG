@@ -7,7 +7,7 @@ npy_files_dir = "./muestras_registros_totales"
 file_names = [file.split('.')[0] for file in os.listdir(npy_files_dir) if file.endswith('.npy')]
 
 # Crear carpeta LOO en el directorio del script
-loo_dir = os.path.join(os.path.dirname(__file__), "LOO")
+loo_dir = "./LOO"
 os.makedirs(loo_dir, exist_ok=True)
 
 # Crear carpetas LOO_XXXXX y su estructura dentro de la carpeta LOO
@@ -67,9 +67,6 @@ mask_files = [file.split('_')[0] for file in os.listdir(masks_dir) if file.endsw
 
 # Obtener nombres únicos
 unique_files = list(set(image_files + mask_files))
-
-# Copiar archivos a las carpetas LOO_XXXX/data/imagenesparch/images y masks
-loo_dir = os.path.join(os.path.dirname(__file__), "LOO")
 
 for name in unique_files:
     loo_subdirs = [os.path.join(loo_dir, subdir) for subdir in os.listdir(loo_dir) if os.path.isdir(os.path.join(loo_dir, subdir)) and subdir.startswith("LOO_")]
