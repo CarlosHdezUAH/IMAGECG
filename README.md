@@ -72,4 +72,8 @@ Ahora, el entorno Conda está configurado con todas las dependencias necesarias 
 
 Este archivo es un script de shell que automatiza varias tareas del proyecto. Se encarga de ejecutar los scripts necesarios y coordinar el flujo de trabajo del proyecto.
 
+### Archivo `config.yml`
+
+Este archivo de configuración permite cambiar algunos parámetros del entrenamiento como el learning rate, el batch size, el número de parches extraidos por cada registro ECG, la red empleada para el entrenamiento, el número de steps de entrenamiento y los pesos asociados a cada clase.
+
 
