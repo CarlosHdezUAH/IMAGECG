@@ -100,8 +100,28 @@ def process_images(carpeta, image_name):
     # Cargar los pesos en el modelo
     Net.load_state_dict(state_dict, strict=False)
     Net.eval()  # Cambiar a modo de evaluación
+    # Ruta de la carpeta que contiene las imágenes
+    carpeta_imagenes = './data/dataset/images/'
+
+    # Obtener la lista de nombres de archivo de imágenes en la carpeta
+    nombres_imagenes = os.listdir(carpeta_imagenes)
+
+    # Inicializar listas para almacenar los valores de píxeles de todas las imágenes
+    valores_pixeles = []
+
+    # Leer todas las imágenes y almacenar sus valores de píxeles normalizados
+    for nombre_imagen in nombres_imagenes:
+        ruta_imagen = os.path.join(carpeta_imagenes, nombre_imagen)
+        imagen = cv2.imread(ruta_imagen)
+        imagen_normalizada = imagen / 255.0  # Normalizar los valores de píxeles
+        valores_pixeles.append(imagen_normalizada)
+
+    # Calcular la media y la desviación estándar de cada canal de color
+    valores_pixeles = np.array(valores_pixeles)
+    mean = np.mean(valores_pixeles, axis=(0, 1, 2))
+    std = np.std(valores_pixeles, axis=(0, 1, 2))
     
-    transformImg=tf.Compose([tf.ToPILImage(),tf.Resize((height,width)),tf.ToTensor(),tf.Normalize((0.52240046, 0.61639365, 0.14784672), (0.04027916, 0.07514099, 0.05628007))])
+    transformImg=tf.Compose([tf.ToPILImage(),tf.Resize((height,width)),tf.ToTensor(),tf.Normalize(mean, std)])
     
     # Obtener la lista de imágenes en el directorio
     image_files = os.listdir(os.path.join(directory))
