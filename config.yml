@@ -1,0 +1,10 @@
+# config.yml
+
+net: "DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1"
+
+batch_size: 32
+learning_rate: 0.0001
+epochs: 1500
+class_weights: [1.0, 10.0]
+num_patches: 50
+

@@ -8,6 +8,7 @@ import shutil
 import imageio
 import torchvision
 import numpy as np
+import yaml
 from skimage.morphology import binary_opening, disk
 from torchvision.transforms import ToTensor, Resize
 import torchvision.transforms as tf
@@ -57,7 +58,17 @@ def segment_image(image_name):
     
 def process_images(carpeta, image_name):
     width=height=256 # image width and height
-    model_path = "./1500.torch"
+    
+    # Obtener la ruta al archivo config.yml
+    config_path = os.path.join(os.path.dirname(__file__), '../../config.yml')
+
+    # Cargar el archivo de configuración
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
+    
+    epochs = config['epochs']
+    
+    model_path = f"./{epochs}.torch"
     directory = carpeta
     ruta_madre = "./metricas/"
     nombre_archivo = os.path.splitext(os.path.basename(image_name))[0] + "_predicted_masks"

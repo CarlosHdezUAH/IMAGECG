@@ -1,14 +1,22 @@
 import os
 import cv2
+import yaml
 
 # Directorio base donde se encuentran las carpetas LOO_XXXXXX
 base_dir = "./LOO/"
 
+# Obtener la ruta al archivo config.yml
+config_path = os.path.join(os.path.dirname(__file__), '../config.yml')
+
+# Cargar el archivo de configuración
+with open(config_path, 'r') as f:
+    config = yaml.safe_load(f)
+    
 # Tamaño del recorte
 crop_size = 256
 
 # Número de parches que se guardarán por imagen
-num_patches = 50
+num_patches = config['num_patches']
 
 def patch_images_in_folder(folder_path):
     # Ruta de las carpetas de imágenes y máscaras

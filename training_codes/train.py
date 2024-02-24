@@ -4,20 +4,29 @@ import cv2
 import torchvision.models.segmentation
 import torch
 import torchvision.transforms as tf
-import json
-from PIL import Image
 import matplotlib.pyplot as plt
+import json
+import yaml
+from PIL import Image
 from rich.progress import Progress
 from rich import print
 from rich.table import Table
 
+
+# Obtener la ruta al archivo config.yml
+config_path = os.path.join(os.path.dirname(__file__), '../../config.yml')
+
+# Cargar el archivo de configuración
+with open(config_path, 'r') as f:
+    config = yaml.safe_load(f)
+    
 with Progress() as progress:
 
     #HIPERPARÁMETROS
-    Learning_Rate=1e-4
+    Learning_Rate= config['learning_rate']
     width=height=256 # image width and height
-    batchSize=32
-    steps = 1500
+    batchSize= config['batch_size']
+    steps = config['epochs']
     
     # Nombre del archivo de texto de salida
     output_file = "resultados.txt"
@@ -89,7 +98,8 @@ with Progress() as progress:
     #--------------Load and set net and optimizer-------------------------------------
     progress.update(task, completed=3)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    Net = torchvision.models.segmentation.deeplabv3_resnet50(weights="DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1")  # Use weights parameter
+    net = class_weights = config['net']
+    Net = torchvision.models.segmentation.deeplabv3_resnet50(weights=net)  # Use weights parameter
     Net.classifier[4] = torch.nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1)) # Change final layer to 3 classes
     Net=Net.to(device)
     optimizer=torch.optim.Adam(params=Net.parameters(),lr=Learning_Rate) # Create adam optimizer
@@ -112,7 +122,14 @@ with Progress() as progress:
         ann = torch.autograd.Variable(ann, requires_grad=False).to(device)  # Load annotation
         Pred = Net(images)['out']  # Make prediction
         Net.zero_grad()
-        weights = torch.FloatTensor([1.0, 10.0]) 
+        # Obtener los valores de 'class_weights' del archivo de configuración
+        class_weights = config['class_weights']
+
+        # Crear un tensor de PyTorch con los valores de 'class_weights'
+        weights = torch.FloatTensor(class_weights)
+
+        # Mover el tensor al dispositivo deseado (por ejemplo, GPU)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         # Verifica el dispositivo del tensor de predicción (Pred)
         device = Pred.device
         weights = weights.to(device)
