@@ -9,7 +9,7 @@ Siga estos pasos para configurar el entorno Conda utilizando el archivo `environ
 1. Clone el repositorio a su máquina local utilizando Git:
 
 ```bash
-https://github.com/CarlosHdezUAH/IMAGECG.git
+git clone https://github.com/CarlosHdezUAH/IMAGECG.git
 ```
 
 2. Navegue al directorio del repositorio clonado:
