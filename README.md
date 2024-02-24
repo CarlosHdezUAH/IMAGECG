@@ -1,6 +1,6 @@
 # IMAGECG
 
-IMAGECG es un implementación basada en Deep Learning que pretende abordar el problema del procesado de señales de electrocardiograma de larga duración a través su conversión a imágenes y la generación de máscaras binarias para entrenar una red de segmentación semmántica.
+IMAGECG es un implementación basada en Deep Learning que pretende abordar el problema del procesado de señales de electrocardiograma de larga duración a través su conversión a imágenes y la generación de máscaras binarias para entrenar una red de segmentación semántica.
 
 ## Instalación
 
