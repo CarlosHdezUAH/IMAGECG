@@ -27,7 +27,7 @@ conda env create -f environment.yml
 4. Active el entorno Conda recién creado:
 
 ```bash
-conda activate nombre-del-entorno
+conda activate imagecg
 ```
 
 Ahora, el entorno Conda está configurado con todas las dependencias necesarias especificadas en el archivo `environment.yml`.
