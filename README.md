@@ -24,6 +24,13 @@ cd */IMAGECG
 conda env create -f environment.yml
 ```
 
+Posible error: 
+ The 'sklearn' PyPI package is deprecated, use 'scikit-learn'
+      rather than 'sklearn' for pip commands.
+Solución:
+```bash
+export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+```
 4. Active el entorno Conda recién creado:
 
 ```bash
