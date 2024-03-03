@@ -15,7 +15,7 @@ git clone https://github.com/CarlosHdezUAH/IMAGECG.git
 2. Navegue al directorio del repositorio clonado:
 
 ```bash
-cd tu-repositorio
+cd */IMAGECG
 ```
 
 3. Cree y active un nuevo entorno Conda a partir del archivo `environment.yml`:
