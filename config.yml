@@ -1,6 +1,24 @@
 # config.yml
 
+#nets (not yet implemented)
+
+# torchvision.models.segmentation.fcn_resnet50
+# torchvision.models.segmentation.fcn_resnet101
+# torchvision.models.segmentation.deeplabv3_resnet50
+# torchvision.models.segmentation.deeplabv3_resnet101
+
+
+
+#weights (not yet implemented as "weights")
 net: "DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1"
+
+# DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
+# DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+# FCN_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
+# FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+
+# DeepLabV3_MobileNet_V3_Large_Weights.COCO_WITH_VOC_LABELS_V1
+# LRASPP_MobileNet_V3_Large_Weights.COCO_WITH_VOC_LABELS_V1
 
 batch_size: 16
 learning_rate: 0.0001
