@@ -3,6 +3,9 @@ from sklearn.preprocessing import PowerTransformer, MinMaxScaler
 import matplotlib.pyplot as plt
 import os
 
+# Establecer la semilla para la generación de números aleatorios
+np.random.seed(42)
+
 # Cargar las señales 14046, 14134, 14157 y 14172 (asegúrate de tener los archivos correspondientes)
 señal_14046 = np.load('muestras_registros_totales/14046.npy')
 señal_14134 = np.load('muestras_registros_totales/14134.npy')
@@ -14,7 +17,7 @@ señal_14184 = np.load('muestras_registros_totales/14184.npy')
 total_muestras = 30_000_000
 
 # Crear una lista de señales
-señales = [señal_14046, señal_14134, señal_14157, señal_14172]
+señales = [señal_14046, señal_14134, señal_14157, señal_14172, señal_14184]
 
 # Inicializar la señal total
 señal_total = []
@@ -23,7 +26,8 @@ señal_total = []
 muestras_por_señal = 1_000_000
 
 while len(señal_total) < total_muestras:
-    señal_actual = np.random.choice(señales)  # Seleccionar una señal aleatoriamente
+    indice_señal = np.random.randint(0, len(señales))  # Seleccionar un índice aleatorio
+    señal_actual = señales[indice_señal]  # Seleccionar la señal correspondiente al índice aleatorio
     inicio = np.random.randint(0, len(señal_actual) - muestras_por_señal)  # Punto aleatorio
     muestras_seleccionadas = señal_actual[inicio:inicio + muestras_por_señal]
     señal_total.extend(muestras_seleccionadas)

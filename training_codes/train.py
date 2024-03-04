@@ -13,6 +13,11 @@ from rich import print
 from rich.table import Table
 
 
+# Fijar las semillas para la reproducibilidad
+seed = 42
+np.random.seed(seed)
+torch.manual_seed(seed)
+
 # Obtener la ruta al archivo config.yml
 config_path = os.path.join(os.path.dirname(__file__), '../../config.yml')
 
@@ -50,7 +55,7 @@ with Progress() as progress:
     # SPLIT INTO TRAIN AND TEST
     progress.update(task, completed=1)
     from sklearn.model_selection import train_test_split
-    X_train, X_test, y_train, y_test = train_test_split(ListImages, ListMasks, test_size = 0.25, random_state = 42)
+    X_train, X_test, y_train, y_test = train_test_split(ListImages, ListMasks, test_size = 0.25, random_state = seed)
     
     #----------------------------------------------Transform image-------------------------------------------------------------------
     progress.update(task, completed=2)
@@ -98,8 +103,8 @@ with Progress() as progress:
     #--------------Load and set net and optimizer-------------------------------------
     progress.update(task, completed=3)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    net = class_weights = config['net']
-    Net = torchvision.models.segmentation.deeplabv3_resnet50(weights=net)  # Use weights parameter
+    net = config['net']
+    Net = torchvision.models.segmentation.deeplabv3_resnet101(weights=net)  # Use weights parameter
     Net.classifier[4] = torch.nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1)) # Change final layer to 3 classes
     Net=Net.to(device)
     optimizer=torch.optim.Adam(params=Net.parameters(),lr=Learning_Rate) # Create adam optimizer

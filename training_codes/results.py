@@ -80,7 +80,7 @@ def process_images(carpeta, image_name):
         
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu') 
     
-    Net = torchvision.models.segmentation.deeplabv3_resnet50(pretrained=False)
+    Net = torchvision.models.segmentation.deeplabv3_resnet101(pretrained=False)
     Net.classifier[4] = torch.nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
     Net = Net.to(device)  # Set net to GPU or CPU
     
