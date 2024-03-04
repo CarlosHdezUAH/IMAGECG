@@ -103,8 +103,20 @@ with Progress() as progress:
     #--------------Load and set net and optimizer-------------------------------------
     progress.update(task, completed=3)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    weights = config['weights']
     net = config['net']
-    Net = torchvision.models.segmentation.deeplabv3_resnet101(weights=net)  # Use weights parameter
+
+    if 'deeplabv3_resnet50' in net:
+        Net = torchvision.models.segmentation.deeplabv3_resnet50(weights=weights)
+    elif 'deeplabv3_resnet101' in net:
+        Net = torchvision.models.segmentation.deeplabv3_resnet101(weights=weights)
+    elif 'fcn_resnet50' in net:
+        Net = torchvision.models.segmentation.fcn_resnet50(weights=weights)
+    elif 'fcn_resnet101' in net:
+        Net = torchvision.models.segmentation.fcn_resnet101(weights=weights)
+    else:
+        raise ValueError("Invalid network configuration provided in config file.")
+
     Net.classifier[4] = torch.nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1)) # Change final layer to 3 classes
     Net=Net.to(device)
     optimizer=torch.optim.Adam(params=Net.parameters(),lr=Learning_Rate) # Create adam optimizer

@@ -1,21 +1,17 @@
 # config.yml
 
-#nets (not yet implemented)
+#nets
 
-# torchvision.models.segmentation.fcn_resnet50
-# torchvision.models.segmentation.fcn_resnet101
-# torchvision.models.segmentation.deeplabv3_resnet50
-# torchvision.models.segmentation.deeplabv3_resnet101
+# net:  torchvision.models.segmentation.fcn_resnet50
+# net:  torchvision.models.segmentation.fcn_resnet101
+# net:  torchvision.models.segmentation.deeplabv3_resnet50
+# net:  torchvision.models.segmentation.deeplabv3_resnet101
 
-
-
-#weights (not yet implemented as "weights")
-net: "DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1"
-
-# DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
-# DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
-# FCN_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
-# FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+#weights
+weights: "DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1"
+# weights:  DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+# weights:  FCN_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
+# weights:  FCN_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
 
 # DeepLabV3_MobileNet_V3_Large_Weights.COCO_WITH_VOC_LABELS_V1
 # LRASPP_MobileNet_V3_Large_Weights.COCO_WITH_VOC_LABELS_V1
