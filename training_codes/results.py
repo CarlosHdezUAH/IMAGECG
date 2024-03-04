@@ -79,8 +79,19 @@ def process_images(carpeta, image_name):
         #print("Se ha creado la carpeta:", output_directory)
         
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu') 
-    
-    Net = torchvision.models.segmentation.deeplabv3_resnet101(pretrained=False)
+    net = config['net']
+
+    if 'deeplabv3_resnet50' in net:
+        Net = torchvision.models.segmentation.deeplabv3_resnet50(pretrained=False)
+    elif 'deeplabv3_resnet101' in net:
+        Net = torchvision.models.segmentation.deeplabv3_resnet101(pretrained=False)
+    elif 'fcn_resnet50' in net:
+        Net = torchvision.models.segmentation.fcn_resnet50(pretrained=False)
+    elif 'fcn_resnet101' in net:
+        Net = torchvision.models.segmentation.fcn_resnet101(pretrained=False)
+    else:
+        raise ValueError("Invalid network configuration provided in config file.")
+
     Net.classifier[4] = torch.nn.Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
     Net = Net.to(device)  # Set net to GPU or CPU
     
